@@ -949,7 +949,7 @@ html {
 }
 
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 0px;
   background: #f5f5f5;
 }
 
