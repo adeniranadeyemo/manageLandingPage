@@ -925,8 +925,6 @@ html {
   margin-right: 1.75rem;
   cursor: pointer;
   transition: all 0.5s;
-  /* Only necessary when overlying images */
-  /* box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.7); */
 }
 
 .dots-dot:last-child {
@@ -939,13 +937,16 @@ html {
   opacity: 1;
 }
 
-/* .dots {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-} */
+.section {
+  transition: transform 1s, opacity 1s;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+.section--hidden {
+  opacity: 0;
+  transform: translateY(8rem);
+}
 
 ::-webkit-scrollbar {
   width: 7px;
