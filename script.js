@@ -44,7 +44,7 @@ const slider = function () {
   function updateSlide() {
     if (window.innerWidth <= 468) {
       slides.forEach((slide, index) => {
-        slide.style.display = index === curSlide ? 'flex' : 'none';
+        slide.style.display = index === curSlide ? 'block' : 'none';
       });
     }
   }
@@ -53,7 +53,13 @@ const slider = function () {
   btnRight.addEventListener('click', () => {
     // Loop back to first slide after the last one
     if (window.innerWidth <= 468) {
-      curSlide = (curSlide + 1) % maxSlide;
+      if (curSlide === maxSlide - 1) {
+        curSlide = 0;
+      } else {
+        curSlide++;
+      }
+      console.log(curSlide);
+
       updateSlide();
       activateDot(curSlide);
     }
@@ -63,7 +69,13 @@ const slider = function () {
   btnLeft.addEventListener('click', () => {
     // Loop back to last slide after the first one
     if (window.innerWidth <= 468) {
-      curSlide = (curSlide - 1 + maxSlide) % maxSlide;
+      if (curSlide === 0) {
+        curSlide = maxSlide - 1;
+      } else {
+        curSlide--;
+      }
+      console.log(curSlide);
+
       updateSlide();
       activateDot(curSlide);
     }
@@ -79,7 +91,6 @@ const slider = function () {
 slider();
 
 const allSections = document.querySelectorAll('.section');
-console.log(allSections);
 
 const revealSection = function (entries, observer) {
   const [entry] = entries;
@@ -97,4 +108,12 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 allSections.forEach(function (section) {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
+});
+
+const btn = document.getElementById('menu-btn');
+const nav = document.getElementById('menu');
+
+btn.addEventListener('click', () => {
+  btn.classList.toggle('open');
+  nav.classList.toggle('nav-open');
 });
